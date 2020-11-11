@@ -15,12 +15,23 @@ namespace Movie_API.Data
         private void loadMovies()
         {
             var appRoot = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.LastIndexOf("\\bin"));
-            //appRoot = appRoot.Substring(0, appRoot.LastIndexOf("") + 1);
             using (var reader = new StreamReader($"{appRoot}\\Data\\metadata.csv"))
             {
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
                     movies = csv.GetRecords<Movie>().ToList();
+                }
+            }
+        }
+        private List<Stat> stats = null;
+        private void loadStats()
+        {
+            var appRoot = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.LastIndexOf("\\bin"));
+            using (var reader = new StreamReader($"{appRoot}\\Data\\stats.csv"))
+            {
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                {
+                    stats = csv.GetRecords<Stat>().ToList();
                 }
             }
         }
@@ -38,6 +49,22 @@ namespace Movie_API.Data
                 .OrderBy(m => m.Language)
                 .ToList();
             return movieList;
+        }
+
+        public List<MovieStats> getMovieStats()
+        {
+            List<MovieStats> movieStatsList = new List<MovieStats>();
+            if (movies == null)
+            {
+                loadMovies();
+            }
+            if(stats == null)
+            {
+                loadStats();
+            }
+
+
+            return movieStatsList;
         }
     }
 }

@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 namespace Movie_API.Controllers
 {
     [ApiController]
-    [Route("[controller]/metadata")]
-    public class MovieController : ControllerBase
+    [Route("[controller]")]
+    public class MetadataController : ControllerBase
     {
-        private readonly ILogger<MovieController> _logger;
+        private readonly ILogger<MetadataController> _logger;
         private DataManager dm = new DataManager();
 
 
-        public MovieController(ILogger<MovieController> logger)
+        public MetadataController(ILogger<MetadataController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet("{movieid}")]
-        public List<Movie> GetMetadata(int movieid = 1)
+        public List<Movie> Get(int movieid = 1)
         {
             List<Movie> movieList = dm.getMovieById(movieid);
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Movie_API.Models
 {
-    public class Stats
+    public class Stat
     {
         public string movieId { get; set; }
         public int watchDurationMs { get; set; }
