@@ -22,10 +22,10 @@ namespace Movie_API.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
-        public List<Movie> GetMetadata(int id = 1)
+        [HttpGet("{movieid}")]
+        public List<Movie> GetMetadata(int movieid = 1)
         {
-            List<Movie> movieList = dm.getMovieById(id);
+            List<Movie> movieList = dm.getMovieById(movieid);
 
             return movieList;
         }
